@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace IvScrumApi.Models
 {
-    public class User
+    public class Team
     {      
         [Column("name")]
         [FromForm]
@@ -15,18 +15,9 @@ namespace IvScrumApi.Models
         [Key]
         [Column("id")]        
         public Guid? Id { get; set; }
-        [Column("picture_url")]
-        [FromForm]
-        public string PictureUrl  { get; set; }
         [Column("trello_id")]
         [FromForm]
         public string TrelloId  { get; set; }
-        [Column("email")]
-        [FromForm]
-        public string Email { get; set; }
-         [Column("team_id")]
-        [FromForm]
-        public string TeamId {get; set; }
         public override string ToString()
         {
             string str = string.Empty;
