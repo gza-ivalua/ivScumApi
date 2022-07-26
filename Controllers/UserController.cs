@@ -58,25 +58,6 @@ namespace IvScrumApi.Controllers
                 _logger.LogError(e.ToString());
                 return null;
             }
-        }   
-
-         //Retrieve a list of user based on the keyword searched
-        [HttpPost]
-        [Route("{id}/device")]
-        public ActionResult SetDeviceId(Guid id, [FromForm] string deviceId)
-        {
-            _logger.LogInformation(deviceId);
-            try{
-                User u =  _context.Users.First(u => u.Id == id);
-                u.DeviceId = deviceId;
-                _context.Users.Update(u);
-                _context.SaveChanges();
-                return Ok(u);
-            }
-            catch(Exception e){
-                _logger.LogError(e.ToString());
-                return null;
-            }
-        }   
+        }          
     }
 }

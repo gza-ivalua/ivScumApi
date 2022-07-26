@@ -21,15 +21,11 @@ namespace IvScrumApi.Models
         public override string ToString()
         {
             string str = string.Empty;
-            str += @":: User ::
+            str += @":: Team ::
 ";
             str += $@"{nameof(Name)} {Name}
 ";
-            str += $@"{nameof(Email)} {Email}
-";
             str += $@"{nameof(Id)} {Id}
-";
-            str += $@"{nameof(PictureUrl)} {PictureUrl}
 ";
             str += $@"{nameof(TrelloId)} {TrelloId}
 ";

@@ -7,10 +7,7 @@ using Microsoft.OpenApi.Models;
 using Npgsql;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
-using CorePush.Apple;
-using CorePush.Google;
-using Microsoft.Extensions.Hosting;
-using IvScrumApi.Models;
+using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 
 namespace IvScrumApi
 {
@@ -33,7 +30,9 @@ namespace IvScrumApi
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "IvScrumApi", Version = "v1" });
             });
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
+            services.AddMvc()
+                .AddNewtonsoftJson()
+                .SetCompatibilityVersion(CompatibilityVersion.Latest);
             string herokuConnectionString = $@"
                 Server={Configuration["PostgreSql:Host"]};
                 Port={Configuration["PostgreSql:Port"]};
@@ -62,7 +61,11 @@ namespace IvScrumApi
                 .AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader();
-            });                   
+            });
+             app.UseEndpoints(endpoints =>
+            {                
+                endpoints.MapControllers();           
+            });            
         }
     }
 }
