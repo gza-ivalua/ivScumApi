@@ -2,10 +2,10 @@
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using FlagApi.Models;
+using IvScrumApi.Models;
 using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
-namespace FlagApi.Controllers
+namespace IvScrumApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -22,27 +22,6 @@ namespace FlagApi.Controllers
             _logger = logger;
             _context = context;
             _contextAccessor = contextAccessor;
-        }
-         //Retrieve a list of user based on the keyword searched
-        [HttpPost]
-        [Route("list")]
-        public ActionResult List([FromForm] FormData arg)
-        {
-            try
-            {                
-                string query = arg.Query;
-                List<User> users = _context.Users
-                    .Where(u => u.Name.ToLower().Contains(query.ToLower()) || u.Email.ToLower().Contains(query.ToLower()))
-                    .ToList<User>();                
-                foreach(User u in users){
-                    _logger.LogInformation(u.ToString());
-                }
-                return Ok(users);
-            }
-            catch(Exception e){
-                _logger.LogError(e.ToString());
-                return null;
-            }
         }
 
         //Get or create a new user if not exists

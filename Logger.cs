@@ -1,8 +1,7 @@
 using System;
 using Microsoft.Extensions.Logging;
-namespace FlagApi
+namespace IvScrumApi
 {
-    test
     public class Logger : ILogger
     {
         private void Info(object message){

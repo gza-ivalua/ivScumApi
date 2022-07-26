@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using  Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
-namespace FlagApi.Models
+namespace IvScrumApi.Models
 {
     public class User
     {        
@@ -23,10 +23,6 @@ namespace FlagApi.Models
         [Column("picture_url")]
         [FromForm]
         public string PictureUrl  { get; set; }
-        [JsonIgnore]
-        public List<Message> MessagesSent {get; set;}
-        [JsonIgnore]
-        public List<Message> MessagesReceived {get; set;}
         public override string ToString()
         {
             string str = string.Empty;

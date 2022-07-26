@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Microsoft.Extensions.Logging;
 
-namespace FlagApi
+namespace IvScrumApi
 {
     public class LoggerProvider : ILoggerProvider
     {

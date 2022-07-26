@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using FlagApi;
+using IvScrumApi;
 
-namespace FlagApi
+namespace IvScrumApi
 {
     public class Program
     {

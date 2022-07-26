@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using FlagApi.Models;
-namespace FlagApi
+using IvScrumApi.Models;
+namespace IvScrumApi
 {
     public class DatabaseContext : DbContext
     {               
@@ -9,22 +9,8 @@ namespace FlagApi
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)  
         {            
-            modelBuilder.Entity<User>().ToTable("users");  
-            modelBuilder.Entity<Message>().ToTable("messages");   
-            // modelBuilder.Entity<Content>().ToTable("contents");
-
-            modelBuilder.Entity<Message>()
-                .HasOne(x => x.Author)
-                .WithMany(x => x.MessagesSent)
-                .HasForeignKey(x => x.AuthorId);         
-
-            modelBuilder.Entity<Message>()
-                .HasOne(x => x.Recipient)
-                .WithMany(x => x.MessagesReceived)
-                .HasForeignKey(x => x.RecipientId);         
+            modelBuilder.Entity<User>().ToTable("users");        
         }
         public DbSet<User> Users { get; set; }
-        public DbSet<Message> Messages { get; set; }
-        // public DbSet<Content> Contents { get; set; }
-    }   
+    }
 }
