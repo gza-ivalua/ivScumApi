@@ -40,6 +40,10 @@ namespace IvScrumApi.Controllers
         public ActionResult UpdateStatus(Guid id, [FromForm] string status)
         {
             _logger.LogInformation(status);
+            BranchStatus value = (BranchStatus)Enum.Parse(typeof(BranchStatus), status, true);
+            var branch = _context.Branches.First(b => b.Id == id);            
+            branch.Status = value;
+            _context.SaveChanges();
             return Ok();
         }         
         [HttpPost]
