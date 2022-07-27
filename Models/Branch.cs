@@ -10,7 +10,7 @@ using System.Runtime.Serialization;
 namespace IvScrumApi.Models
 {    
     public enum BranchStatus{
-        [EnumMember(Value = "open")]
+        [EnumMember(Value = "opened")]
         Opened,
         [EnumMember(Value = "locked")]
         Locked
