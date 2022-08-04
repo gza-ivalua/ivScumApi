@@ -24,9 +24,9 @@ namespace IvScrumApi.Models
         [Column("email")]
         [FromForm]
         public string Email { get; set; }
-         [Column("team_id")]
+        [Column("team")]
         [FromForm]
-        public string TeamId {get; set; }
+        public Guid Team {get; set; }
         public override string ToString()
         {
             string str = string.Empty;

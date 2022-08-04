@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using IvScrumApi.Models;
 using Microsoft.AspNetCore.Http;
-using System.Collections.Generic;
 namespace IvScrumApi.Controllers
 {
     [ApiController]
@@ -44,15 +43,25 @@ namespace IvScrumApi.Controllers
                 return Ok(u.Id);
             }
             return Ok(arg.Id);    
-        }
-    
-         //Retrieve a list of user based on the keyword searched
+        }         
         [HttpGet]
         [Route("{id}")]
         public ActionResult GetUser(Guid id)
         {
             try{
                 return Ok(_context.Users.First(u => u.Id == id));
+            }
+            catch(Exception e){
+                _logger.LogError(e.ToString());
+                return null;
+            }
+        }        
+        [HttpGet]
+        [Route("/team/{teamId}")]
+        public ActionResult GetUsers(Guid teamId)
+        {
+            try{
+                return Ok(_context.Users.Where(u => u.Team == teamId));
             }
             catch(Exception e){
                 _logger.LogError(e.ToString());
