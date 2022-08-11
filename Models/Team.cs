@@ -1,9 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System;
-using System.Collections.Generic;
 using  Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 
 namespace IvScrumApi.Models
 {
@@ -15,7 +13,7 @@ namespace IvScrumApi.Models
         [Key]
         [Column("id")]        
         public Guid? Id { get; set; }
-        [Column("trello_id")]
+        [Column("trello")]
         [FromForm]
         public string TrelloId  { get; set; }
         public override string ToString()

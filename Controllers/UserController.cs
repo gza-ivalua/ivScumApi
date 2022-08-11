@@ -21,29 +21,7 @@ namespace IvScrumApi.Controllers
             _logger = logger;
             _context = context;
             _contextAccessor = contextAccessor;
-        }
-
-        //Get or create a new user if not exists
-        [HttpPost]
-        public ActionResult Get([FromForm] User arg)
-        {                                    
-            bool exists = _context.Users.Any(u => u.Email == arg.Email);
-            if (!exists) {                
-                _logger.LogWarning("not exists");
-                _context.Users.Add(arg);
-                _context.SaveChanges();
-                _logger.LogInformation(arg.ToString());
-            }
-            else{
-                User u = _context.Users.First(u => u.Email == arg.Email);
-                _logger.LogInformation(u.ToString());
-                u.PictureUrl = arg.PictureUrl;
-                _context.Users.Update(u);
-                _context.SaveChanges();
-                return Ok(u.Id);
-            }
-            return Ok(arg.Id);    
-        }         
+        }        
         [HttpGet]
         [Route("{id}")]
         public ActionResult GetUser(Guid id)
@@ -57,7 +35,7 @@ namespace IvScrumApi.Controllers
             }
         }        
         [HttpGet]
-        [Route("/team/{teamId}")]
+        [Route("team/{teamId}")]
         public ActionResult GetUsers(Guid teamId)
         {
             try{
