@@ -1,30 +1,23 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System;
-using  Microsoft.AspNetCore.Mvc;
-
 namespace IvScrumApi.Models
 {
     public class User
     {      
-        [Column("name")]
-        [FromForm]
+        [Column("name")]                                
         public string Name { get; set; }
         [Key]
-        [Column("id")]        
-        public Guid? Id { get; set; }        
-        [Column("trello")]
-        [FromForm]
-        public string TrelloId  { get; set; }       
-        [Column("trigram")]
-        [FromForm]
+        [Column("id")]     
+        public Guid? Id { get; set; }                     
+        [Column("trigram")]        
         public string Trigram  { get; set; }        
         [Column("team")]
-        [FromForm]
         public Guid Team {get; set; }
         [Column("trello")]
-        [FromForm]
         public string Trello {get; set; }
+        [Column("here")]        
+        public bool Here {get; set; }
         public override string ToString()
         {
             string str = string.Empty;
@@ -33,9 +26,11 @@ namespace IvScrumApi.Models
             str += $@"{nameof(Name)} {Name}
 ";
             str += $@"{nameof(Id)} {Id}
-";
-            str += $@"{nameof(TrelloId)} {TrelloId}
-";
+"; 
+            str += $@"{nameof(Here)} {Here}
+"; 
+            str += $@"{nameof(Trello)} {Trello}
+"; 
             return str;
         }
     }

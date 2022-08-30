@@ -2,8 +2,10 @@
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using IvScrumApi.Models;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
+using System.Reflection;
+using IvScrumApi.Models;
 namespace IvScrumApi.Controllers
 {
     [ApiController]
@@ -45,6 +47,57 @@ namespace IvScrumApi.Controllers
                 _logger.LogError(e.ToString());
                 return null;
             }
-        }          
+        }    
+        [HttpPost]        
+        public ActionResult UpdateUser([FromForm] Models.User data)
+        {
+            try{                                       
+                if (data.Id == null){
+                    data.Id = Guid.NewGuid();
+                    var u = _context.Users.Add(data).Entity;
+                    _context.SaveChanges();   
+                    return Ok(u);                 
+                }
+                else{
+                    _context.Users.Update(data);                   
+                    _context.SaveChanges();
+                }                
+                return Ok(data);
+            }
+            catch(Exception e){
+                _logger.LogError(e.ToString());
+                return null;
+            }
+        }        
+        [HttpGet]
+        [Route("{id}/delete")]
+        public ActionResult DeleteUser(Guid id)
+        {
+            try{
+                _context.Users.Remove(new Models.User(){ Id = id});
+                _context.SaveChanges();
+                return Ok();
+            }
+            catch(Exception e){
+                _logger.LogError(e.ToString());
+                return null;
+            }
+        }       
+        [HttpPost]
+        [Route("{id}/here")]
+        public ActionResult UpdatePresenceStatus(Guid id, [FromForm] bool here)
+        {
+            try{
+                var u = _context.Users.First(u => u.Id == id);                
+                u.Here = here;
+                _context.Update(u);
+                _context.SaveChanges();                
+                return Ok();
+            }
+            catch(Exception e){
+                _logger.LogError(e.ToString());
+                return null;
+            }
+        }           
     }
 }
