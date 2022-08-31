@@ -32,6 +32,27 @@ namespace IvScrumApi.Controllers
                 _logger.LogError(e.ToString());
                 return null;
             }
-        }          
+        }
+        [HttpPost]        
+        public ActionResult UpdateTeam([FromForm] Models.Team data)
+        {
+            try{                                       
+                if (data.Id == null){
+                    data.Id = Guid.NewGuid();
+                    var u = _context.Teams.Add(data).Entity;
+                    _context.SaveChanges();   
+                    return Ok(u);               
+                }
+                else{
+                    _context.Teams.Update(data);                   
+                    _context.SaveChanges();
+                }
+                return Ok(data);
+            }
+            catch(Exception e){
+                _logger.LogError(e.ToString());
+                return null;
+            }
+        }                 
     }
 }
