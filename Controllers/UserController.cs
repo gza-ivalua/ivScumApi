@@ -38,10 +38,20 @@ namespace IvScrumApi.Controllers
         }        
         [HttpGet]
         [Route("team/{teamId}")]
-        public ActionResult GetUsers(Guid teamId)
+        public ActionResult GetUsers(Guid teamId, bool newUser)
         {
             try{
-                return Ok(_context.Users.Where(u => u.Team == teamId));
+                var users = _context.Users.Where(u => u.Team == teamId);
+                if (newUser){
+                    _logger.LogError(newUser.ToString());
+                    var finalList = users.ToList();
+                    finalList.Add(new User(){
+                        Team = teamId,
+                        Id = null
+                     });
+                    return Ok(finalList);
+                }
+                return Ok(users);
             }
             catch(Exception e){
                 _logger.LogError(e.ToString());
