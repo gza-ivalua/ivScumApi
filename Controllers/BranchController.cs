@@ -35,6 +35,12 @@ namespace IvScrumApi.Controllers
         {
             return Ok(_context.Branches.Where(b => b.Id == id));
         }    
+        [HttpGet]
+        [Route("status")]
+        public ActionResult GetStatus()
+        {
+            return Ok(_context.Branches.All(b => b.Status == BranchStatus.Opened));
+        }    
         [HttpPost]
         [Route("{id}/updateStatus")]
         public ActionResult UpdateStatus(Guid id, [FromForm] string status)
