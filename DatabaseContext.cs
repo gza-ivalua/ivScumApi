@@ -11,9 +11,11 @@ namespace IvScrumApi
         {                             
             modelBuilder.Entity<Branch>().ToTable("branches"); 
             modelBuilder.Entity<Team>().ToTable("teams"); 
-            modelBuilder.Entity<User>().ToTable("users");            
+            modelBuilder.Entity<User>().ToTable("users");
+            modelBuilder.Entity<Backlog>().ToTable("backlog");     
         }
         public DbSet<User> Users { get; set; }
+        public DbSet<Backlog> Backlog { get; set; }
         public DbSet<Branch> Branches { get; set; }
         public DbSet<Team> Teams { get; set; }
     }
