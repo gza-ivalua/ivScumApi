@@ -19,10 +19,9 @@ namespace IvScrumApi.Models
         public int Minor { get; set; }
         [Column("date")]
         public DateTime? Date { get; set; }
-        [JsonIgnore]
-        [FromForm(Name = "teamId")]
+        [JsonIgnore]        
         [Column("team_id")]
-        public Guid TeamId { get; set; }
+        public string TeamId { get; set; }
         public override string ToString()
         {
             string str = "";
