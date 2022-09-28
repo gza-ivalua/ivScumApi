@@ -26,6 +26,8 @@ namespace IvScrumApi.Models
             string str = "";
             str += $@"Blocking: {Blocking} - Major: {Major} - Minor: {Minor}
 ";            
+            str += $@"Team ID: {TeamId}
+";            
             str += $"Date: {Date}";
             return str;
         }
