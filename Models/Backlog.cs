@@ -2,6 +2,7 @@ using Newtonsoft.Json;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Mvc;
 namespace IvScrumApi.Models
 {
     public class Backlog
@@ -19,6 +20,7 @@ namespace IvScrumApi.Models
         [Column("date")]
         public DateTime? Date { get; set; }
         [JsonIgnore]
+        [FromForm(Name = "teamId")]
         [Column("team_id")]
         public Guid TeamId { get; set; }
         public override string ToString()
