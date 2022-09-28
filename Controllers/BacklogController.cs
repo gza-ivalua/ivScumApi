@@ -24,7 +24,8 @@ namespace IvScrumApi.Controllers
         }        
         [HttpPost]        
         public ActionResult StoreBacklogData([FromBody] Backlog data )
-        {             
+        { 
+            _logger.LogInformation(data.ToString());
             if (!data.Date.HasValue)
                 data.Date = DateTime.Now;
             data.Id = Guid.NewGuid();         
@@ -35,7 +36,7 @@ namespace IvScrumApi.Controllers
         }   
         [HttpGet]
         [Route("{teamId}")]
-        public ActionResult GetBacklogData(string teamId)
+        public ActionResult GetBacklogData(Guid teamId)
         {
             var date = DateTime.Now;
             date = date.AddDays(-30);
