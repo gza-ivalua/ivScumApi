@@ -3,6 +3,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
 using IvScrumApi.Models;
 namespace IvScrumApi.Controllers
 {
@@ -48,6 +49,31 @@ namespace IvScrumApi.Controllers
                 _logger.LogInformation(b.ToString());    
             }            
             return Ok(data);
+        }
+
+        [HttpGet]
+        [Route("all")]
+        public ActionResult GetBacklogsData()
+        {
+            var date = DateTime.Now;
+            date = date.AddDays(-30);
+            try{
+                // var teams = _context.Teams;
+                List<Team> teams = new List<Team>();
+                foreach(Team team in _context.Teams.ToList()){
+                    team.Backlogs = _context.Backlog                
+                        .Where(b => DateTime.Compare(b.Date.Value, date) > 0)
+                        .Where(t => t.TeamId == team.Id).ToList();     
+                    teams.Add(team);                                 
+                }
+                return Ok(teams);            
+            } 
+            catch(Exception e){
+                _logger.LogInformation($@"{e.ToString()}
+{e.Message}
+{e.StackTrace}");                
+            } 
+            return Ok();                      
         }
 
     }

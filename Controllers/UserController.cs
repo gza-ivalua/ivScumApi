@@ -41,12 +41,12 @@ namespace IvScrumApi.Controllers
         public ActionResult GetUsers(Guid teamId, bool newUser)
         {
             try{
-                var users = _context.Users.Where(u => u.Team == teamId);
+                var users = _context.Users.Where(u => u.TeamId == teamId);
                 if (newUser){
                     _logger.LogError(newUser.ToString());
                     var finalList = users.ToList();
                     finalList.Add(new User(){
-                        Team = teamId,
+                        TeamId = teamId,
                         Id = null
                      });
                     return Ok(finalList);

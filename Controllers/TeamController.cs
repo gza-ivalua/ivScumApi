@@ -26,7 +26,12 @@ namespace IvScrumApi.Controllers
         public ActionResult GetTeams()
         {
             try{
-                return Ok(_context.Teams);
+                
+                var teams = _context.Teams.ToList();                
+                foreach (Team t in teams){
+                    t.Devs = _context.Users.Where(u => u.TeamId == t.Id).ToList();
+                }                
+                return Ok(teams);
             }
             catch(Exception e){
                 _logger.LogError(e.ToString());

@@ -11,9 +11,9 @@ namespace IvScrumApi.Models
         [Column("id")]     
         public Guid? Id { get; set; }                     
         [Column("trigram")]        
-        public string Trigram  { get; set; }        
+        public string Trigram  { get; set; }          
         [Column("team")]
-        public Guid Team {get; set; }
+        public Guid TeamId {get; set; }
         [Column("trello")]
         public string Trello {get; set; }
         [Column("here")]        
